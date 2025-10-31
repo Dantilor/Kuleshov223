@@ -1,0 +1,1 @@
+https://photobatya.netlify.app/

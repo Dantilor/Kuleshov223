@@ -1,0 +1,221 @@
+/* Обнуление отступов и скролла */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  touch-action: none;
+  background-color: #121212;
+  color: #ff0000;
+  font-family: 'Roboto', 'Arial', sans-serif;
+}
+
+/* Основная структура приложения */
+.MuiContainer-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0 !important;
+  margin: 0;
+}
+
+/* Хедер приложения */
+.MuiAppBar-root {
+  background-color: #000 !important;
+  border-bottom: 3px solid #ff0000 !important;
+  flex-shrink: 0;
+}
+
+/* Панель инструментов хедера */
+.MuiToolbar-root {
+  min-height: 56px !important;
+  padding: 0 12px !important;
+}
+
+/* Основной контент */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto; /* Разрешаем скролл */
+  padding: 10px;
+  background-color: #121212;
+}
+
+/* Контейнер изображения */
+.image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed #444;
+  border-radius: 8px;
+  background-color: #000;
+  position: relative;
+  overflow: auto; /* Разрешаем скролл */
+  margin-bottom: 12px;
+  min-height: 300px;
+}
+
+/* Холст для изображения */
+canvas {
+  max-width: none; /* Убираем ограничения */
+  max-height: none;
+  object-fit: contain;
+}
+
+/* Блок информации о файле */
+.file-info-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px;
+  background-color: #2a2a2a;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+/* Элемент информации */
+.file-info-item {
+  flex: 1 1 45%;
+  min-width: 120px;
+  text-align: left;
+  color: #aaa;
+}
+
+.file-info-item strong {
+  color: #fff;
+  display: block;
+  margin-top: 2px;
+}
+
+/* Кнопки */
+.MuiButton-root {
+  border-radius: 8px !important;
+  font-weight: bold !important;
+  text-transform: none !important;
+}
+
+.MuiButton-contained {
+  background-color: #ff0000 !important;
+  color: #000 !important;
+}
+
+.MuiButton-contained:hover {
+  background-color: #ff3333 !important;
+}
+
+/* Иконки */
+.MuiSvgIcon-root {
+  font-size: 1.2rem !important;
+}
+
+/* Боковое меню */
+.MuiDrawer-paper {
+  background-color: #111 !important;
+  color: #ff0000 !important;
+  border-left: 3px solid #ff0000 !important;
+  width: 280px !important;
+}
+
+/* Заголовки */
+.MuiTypography-h5 {
+  font-size: 1.3rem !important;
+  margin-bottom: 16px !important;
+  color: #fff !important;
+}
+
+/* Алерты */
+.MuiAlert-root {
+  background-color: #2a2a2a !important;
+  color: #ff0000 !important;
+  border: 1px solid #ff0000;
+  margin: 8px 0;
+}
+
+/* Плейсхолдер изображения */
+.placeholder-text {
+  color: #666;
+  text-align: center;
+  padding: 0 16px;
+}
+
+/* Стили для слайдера */
+.MuiSlider-root {
+  height: 8px !important;
+}
+
+.MuiSlider-thumb {
+  width: 18px !important;
+  height: 18px !important;
+  margin-top: -7px !important;
+}
+
+.MuiSlider-rail {
+  background-color: #444 !important;
+}
+
+.MuiSlider-track {
+  background-color: #ff0000 !important;
+  border: none !important;
+}
+
+.MuiSlider-mark {
+  background-color: #666 !important;
+  width: 2px !important;
+  height: 8px !important;
+  border-radius: 0 !important;
+}
+
+.MuiSlider-markLabel {
+  color: #aaa !important;
+  font-size: 0.75rem !important;
+}
+
+/* Адаптивные стили */
+@media (max-width: 480px) {
+  .file-info-item {
+    flex: 1 1 100%;
+  }
+  
+  .MuiButton-root {
+    font-size: 0.75rem !important;
+    padding: 6px 10px !important;
+  }
+  
+  .MuiTypography-h6 {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .MuiToolbar-root {
+    padding: 0 8px !important;
+  }
+  
+  .MuiButton-startIcon {
+    margin-right: 4px !important;
+  }
+}
+
+/* Улучшаем отображение полос прокрутки */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ff0000;
+  border-radius: 6px;
+  border: 2px solid #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff3333;
+}
