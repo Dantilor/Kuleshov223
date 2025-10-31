@@ -203,7 +203,7 @@ function App() {
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
             // Создаем Web Worker для обработки
-            const worker = new Worker(new URL('../workers/convolutionWorker.ts', import.meta.url), {
+            const worker = new Worker(new URL('./workers/convolutionWorker.ts', import.meta.url), {
                 name: 'convolution-worker',
                 type: 'module'
             });
