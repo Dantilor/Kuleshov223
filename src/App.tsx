@@ -81,6 +81,22 @@ function App() {
     const [preview, setPreview] = useState(true);
     const [originalLayerImage, setOriginalLayerImage] = useState<HTMLImageElement | null>(null);
 
+    // ✅ Кнопка "Скачать результат" — отдельный обработчик
+    const handleDownloadImage = () => {
+        if (!canvasRef.current) return;
+
+        const canvas = canvasRef.current;
+        const link = document.createElement('a');
+
+        const baseName = imageInfo?.name
+            ? imageInfo.name.replace(/\.[^.]+$/, '')
+            : 'image';
+
+        link.href = canvas.toDataURL('image/png');
+        link.download = `${baseName}_edited.png`;
+        link.click();
+    };
+
     // Функция изменения масштаба слоя
     const changeLayerScale = (id: string, scale: number) => {
         setLayers(prev => prev.map(layer =>
@@ -123,12 +139,14 @@ function App() {
         ctx.putImageData(correctedData, 0, 0);
         const dataUrl = canvas.toDataURL();
         const img = new Image();
+
+        img.onload = () => {
+            setLayers(prev => prev.map(layer =>
+                layer.id === activeLayerId ? { ...layer, image: img } : layer
+            ));
+        };
+
         img.src = dataUrl;
-
-        setLayers(prev => prev.map(layer =>
-            layer.id === activeLayerId ? { ...layer, image: img } : layer
-        ));
-
         setCurvesDialogOpen(false);
     };
 
@@ -869,6 +887,24 @@ function App() {
                             />
                         </Button>
 
+                        <Button
+                            variant="outlined"
+                            onClick={handleDownloadImage}
+                            sx={{
+                                marginTop: '8px',
+                                padding: '4px 8px',
+                                fontSize: '0.75rem',
+                                borderColor: '#ff0000',
+                                color: '#ff0000',
+                                '&:hover': {
+                                    borderColor: '#ff3333',
+                                    color: '#ff3333'
+                                }
+                            }}
+                        >
+                            Скачать результат
+                        </Button>
+
                         <IconButton
                             sx={{
                                 backgroundColor: '#ff0000',
@@ -1350,7 +1386,10 @@ function App() {
                             <Button
                                 variant="contained"
                                 startIcon={<TuneIcon />}
-                                onClick={handleOpenCurvesDialog}
+                                onClick={() => {
+                                    handleOpenCurvesDialog();
+                                    setOpenMenu(false);
+                                }}
                                 sx={{
                                     backgroundColor: '#ff0000',
                                     color: '#000',
